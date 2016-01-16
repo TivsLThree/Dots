@@ -7,7 +7,6 @@ public class UpdateThread implements Runnable {
 	int delay;
 
 	public UpdateThread(int delay) {
-		Main.ts.add(this);
 		this.delay = delay;
 	}
 

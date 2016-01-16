@@ -19,7 +19,7 @@ public class GameUpdater {
 			Entity e = ei.next();
 		//	System.out.println(e.pos[0]);
 			e.tick();
-			System.out.println(Thread.currentThread());
+		//	System.out.println(Thread.currentThread());
 		
 		}
 	}
