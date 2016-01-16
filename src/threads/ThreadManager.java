@@ -4,7 +4,7 @@ public class ThreadManager {
 	PaintThread paint = new PaintThread(60);
 	UpdateThread update = new UpdateThread(1000);
 	public ThreadManager() {
-		wakeUp();
+		
 	}
 
 	public void wakeUp() {
@@ -14,8 +14,8 @@ public class ThreadManager {
 
 	private void start() {
 
-		new Thread(paint).start();
-		 new Thread(update).start();
+		new Thread(paint,"Paint").start();
+		 new Thread(update,"Update").start();
 
 	}
 
