@@ -13,7 +13,7 @@ public class MainScreenCanvas extends JPanel {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		Graphics2D g = (Graphics2D) graphics;
-		this.setBackground(Color.black);
+		this.setBackground(new Color(32,57,39));
 		g.setColor(getBackground());
 		g.fillRect(0, 0, Settings.width, Settings.height);
 		for (Drawable d : obMan.drawables)

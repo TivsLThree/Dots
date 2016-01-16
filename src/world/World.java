@@ -31,7 +31,7 @@ public class World extends Drawable {
 
 		for (int i = 0; i < worldMap.length; i++) {
 			for (int k = 0; k < worldMap[0].length; k++) {
-				g.setColor(Color.darkGray);
+				g.setColor(new Color(41,77,51));
 				if (worldMap[i][k] == 1) {
 					g.setColor(new Color(30, 30, 30));
 				}
