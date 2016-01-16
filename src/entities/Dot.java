@@ -3,7 +3,9 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
+import game.Main;
 import game.Settings;
+import world.World;
 
 import static game.Settings.*;
 
@@ -18,6 +20,7 @@ public class Dot extends Entity {
 	 * damagedPercent.
 	 */
 	private double attackPercentStrength = .25d;
+
 	public Dot(Team t) {
 		team = t;
 
@@ -30,23 +33,23 @@ public class Dot extends Entity {
 	private void move() {
 		switch (Direction.getRandom()) {
 		case DOWN:
-			if (pos[1] < Settings.worldSize[1] - 2) {
+			if (pos[1] < Settings.worldSize[1] - 2 && canMove(Direction.DOWN, pos)) {
 				pos[1] += 1;
 			}
 			break;
 		case LEFT:
-			if (pos[0] > 1) {
+			if (pos[0] > 1 && canMove(Direction.LEFT, pos)) {
 				pos[0] -= 1;
 			}
 			break;
 		case RIGHT:
-			if (pos[0] < Settings.worldSize[0] - 2) {
+			if (pos[0] < Settings.worldSize[0] - 2 && canMove(Direction.RIGHT, pos)) {
 				pos[0] += 1;
 			}
 			break;
 
 		case UP:
-			if (pos[1] > 1) {
+			if (pos[1] > 1 && canMove(Direction.UP, pos)) {
 				pos[1] -= 1;
 			}
 			break;
@@ -75,9 +78,24 @@ public class Dot extends Entity {
 	@Override
 	public void draw(Graphics2D g) {
 		g.setColor(new Color(team.getColor().getRed(), team.getColor().getGreen(), team.getColor().getBlue(),
-				(int) ((1d - Math.min(1d,damagedPercent)) * 255)));
+				(int) ((1d - Math.min(1d, damagedPercent)) * 255)));
 
 		g.fillRect(pos[0] * size[0], pos[1] * size[1], size[0] - 1, size[1] - 1);
+	}
+
+	private boolean canMove(Direction d, int[] pos) {
+		switch (d) {
+		case DOWN:
+			return World.worldMap[pos[0]][pos[1] + 1] != 1;
+
+		case LEFT:
+			return World.worldMap[pos[0] - 1][pos[1]] != 1;
+		case RIGHT:
+			return World.worldMap[pos[0] + 1][pos[1]] != 1;
+		case UP:
+			return World.worldMap[pos[0]][pos[1] - 1] != 1;
+		}
+		return false;
 	}
 
 }

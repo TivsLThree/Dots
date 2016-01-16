@@ -18,7 +18,7 @@ public class Main {
 	public static World map;
 	public static ThreadManager threadOverseer;
 	public static GameUpdater updater;
-	public static ArrayList<Dot> t;
+	public static ArrayList<Dot> teams;
 
 	public static void main(String[] args) {
 		initAll();
@@ -41,10 +41,11 @@ public class Main {
 
 		screen = new MainScreen(Settings.name, Settings.width, Settings.height);
 
-		t = new ArrayList<Dot>();
+		teams = new ArrayList<Dot>();
 		for (int i = 0; i < 200; i++) {
-			t.add(new Dot(Team.TwelveVoltBolt));
-			t.add(new Dot(Team.Pink));
+			teams.add(new Dot(Team.TwelveVoltBolt));
+			teams.add(new Dot(Team.Pink));
+			
 		}
 		//
 	}
