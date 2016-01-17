@@ -33,23 +33,23 @@ public class Dot extends Entity {
 	private void move() {
 		switch (Direction.getRandom()) {
 		case DOWN:
-			if (pos[1] < Settings.worldSize[1] - 2 && canMove(Direction.DOWN, pos)) {
+			if (pos[1] < Settings.worldSize[1] - 2 && isBlockInPosition(Direction.DOWN, pos)) {
 				pos[1] += 1;
 			}
 			break;
 		case LEFT:
-			if (pos[0] > 1 && canMove(Direction.LEFT, pos)) {
+			if (pos[0] > 1 && isBlockInPosition(Direction.LEFT, pos)) {
 				pos[0] -= 1;
 			}
 			break;
 		case RIGHT:
-			if (pos[0] < Settings.worldSize[0] - 2 && canMove(Direction.RIGHT, pos)) {
+			if (pos[0] < Settings.worldSize[0] - 2 && isBlockInPosition(Direction.RIGHT, pos)) {
 				pos[0] += 1;
 			}
 			break;
 
 		case UP:
-			if (pos[1] > 1 && canMove(Direction.UP, pos)) {
+			if (pos[1] > 1 && isBlockInPosition(Direction.UP, pos)) {
 				pos[1] -= 1;
 			}
 			break;
@@ -83,7 +83,7 @@ public class Dot extends Entity {
 		g.fillRect(pos[0] * size[0], pos[1] * size[1], size[0] - 1, size[1] - 1);
 	}
 
-	private boolean canMove(Direction d, int[] pos) {
+	private boolean isBlockInPosition(Direction d, int[] pos) {
 		switch (d) {
 		case DOWN:
 			return World.worldMap[pos[0]][pos[1] + 1] != 1;

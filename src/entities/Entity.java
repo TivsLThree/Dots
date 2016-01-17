@@ -8,7 +8,7 @@ import game.Settings;
 public abstract class Entity extends Drawable {
 	public boolean markOfDeath = false;
 	String uniqueID = UUID.randomUUID().toString();
-	public int[] pos = { 1, 1 };
+	public int[] pos = { 60, 40 };
 	public int[] size = { Settings.scaleFactor[0], Settings.scaleFactor[1] };
 
 	public Entity() {

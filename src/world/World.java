@@ -20,9 +20,12 @@ public class World extends Drawable {
 		// Could use cave generator from previous game.
 		for (int i = 0; i < worldMap.length; i++) {
 			for (int k = 0; k < worldMap[0].length; k++) {
-				worldMap[i][k] = ((i == 0 || k == 0 || i == worldMap.length - 1 || k == worldMap[0].length - 1)
-						&& Math.random() > 0.1) ? 1 : 0;
-				worldMap[i][k] = (i == 0 || k == 0 || i == worldMap.length - 1 || k == worldMap[0].length - 1) ? -1 : 0;
+				worldMap[i][k] = 0;
+				worldMap[i][k] = (i == 0 || k == 0 || i == worldMap.length - 1 || k == worldMap[0].length - 1) ? -1
+						: worldMap[i][k];
+
+				worldMap[i][k] = ((i != 0 && k != 0 && i != worldMap.length - 1 && k != worldMap[0].length - 1)
+						&& Math.random() > 0.99) ? 1 : worldMap[i][k];
 
 			}
 		}
@@ -33,9 +36,15 @@ public class World extends Drawable {
 
 		for (int i = 0; i < worldMap.length; i++) {
 			for (int k = 0; k < worldMap[0].length; k++) {
-				g.setColor(new Color(41, 77, 51));
-				if (worldMap[i][k] == -1 || worldMap[i][k] == 1) {
+
+				if (worldMap[i][k] == 1) {
 					g.setColor(new Color(30, 30, 30));
+
+				} else if (worldMap[i][k] == -1) {
+					g.setColor(new Color(100 + (int) (Math.random() * 100), 50 + (int) (Math.random() * 10),
+							50 + (int) (Math.random() * 10)));
+				} else {
+					g.setColor(new Color(41, 77, 51));
 				}
 				g.fillRect(i * scaleFactor[0], k * scaleFactor[1], scaleFactor[0] - 1, scaleFactor[1] - 1);
 
