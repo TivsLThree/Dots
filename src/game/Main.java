@@ -14,7 +14,7 @@ import world.World;
 public class Main {
 	public static MainScreen screen;
 	public static MainScreenCanvas msc;
-	public static ObjectManager obMan;
+	public volatile static ObjectManager obMan;
 	public static World map;
 	public static ThreadManager threadOverseer;
 	public static GameUpdater updater;
@@ -42,7 +42,7 @@ public class Main {
 		screen = new MainScreen(Settings.name, Settings.width, Settings.height);
 
 		teams = new ArrayList<Dot>();
-		for (int i = 0; i < 200; i++) {
+		for (int i = 0; i < 2000; i++) {
 			teams.add(new Dot(Team.TwelveVoltBolt));
 			teams.add(new Dot(Team.Pink));
 			

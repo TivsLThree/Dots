@@ -13,22 +13,17 @@ public class GameUpdater {
 	}
 
 	public void tick() {
-		
+		System.out.println(Main.obMan.drawables.size() + ":"+ Main.obMan.entities.size() + ":");
 		Main.obMan.entities.trimToSize();
 		Iterator<Entity> ei= Main.obMan.entities.listIterator();
-		ArrayList<Entity> markedForDeath= new ArrayList<>();
 		while( ei.hasNext()) {
 			Entity e = ei.next();
-		//	System.out.println(e.pos[0]);
-			e.tick();
-			if(e.markOfDeath){
-				markedForDeath.add(e);
+			e.tick();	
+				if(e.markOfDeath){
+					ei.remove();
+									
 			}
-		//	System.out.println(Thread.currentThread());	
 		}
-		for(Entity e: markedForDeath){
-			Main.obMan.removeFromEntities(e);
-			Main.obMan.removeFromDrawables(e);
-		}
+
 	}
 }

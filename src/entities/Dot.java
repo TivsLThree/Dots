@@ -62,16 +62,18 @@ public class Dot extends Entity {
 	 * Always call last in the tick method
 	 */
 	@Override
-	protected boolean markForDeath() {
-		if (damagedPercent >= 1) {
+	public void markForDeath() {
+		if (damagedPercent >= 1) {	
 			markOfDeath = true;
 		}
-		return markOfDeath;
+
 	}
 
 	@Override
 	public void tick() {
 		move();
+		if(isInLava(pos))
+			takeDamage(1);
 		markForDeath();
 	}
 
@@ -98,4 +100,12 @@ public class Dot extends Entity {
 		return false;
 	}
 
+	private boolean isInLava(int[] pos) {
+		return World.worldMap[pos[0]][pos[1]] == -1;
+	}
+
+	@Override
+	protected void takeDamage(double d) {
+		damagedPercent += d;
+	}
 }
