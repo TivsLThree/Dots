@@ -43,8 +43,9 @@ public class Main {
 
 		teams = new ArrayList<Dot>();
 		for (int i = 0; i < 2000; i++) {
-			teams.add(new Dot(Team.TwelveVoltBolt));
-			teams.add(new Dot(Team.Pink));
+			for(Team t: Team.values()){
+				teams.add(new Dot((t)));
+			}
 			
 		}
 		//
