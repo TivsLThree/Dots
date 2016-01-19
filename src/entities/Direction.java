@@ -3,7 +3,7 @@ package entities;
 import java.util.Random;
 
 public enum Direction {
-	UP, DOWN, LEFT, RIGHT;
+	UP, DOWN, LEFT, RIGHT, NONE;
 	private static final Direction[] VALUES = values();
 	private static final int SIZE = VALUES.length;
 	private static final Random RANDOM = new Random();
