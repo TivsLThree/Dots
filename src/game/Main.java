@@ -2,20 +2,27 @@ package game;
 
 import java.util.ArrayList;
 
+import display.InfoScreen;
+import display.InfoScreenCanvas;
 import display.MainScreen;
 import display.MainScreenCanvas;
 import entities.ObjectManager;
 import entities.Team;
+import input.Mouse;
 import entities.Dot;
 import logic.GameUpdater;
 import threads.ThreadManager;
 import world.World;
 
 public class Main {
+	public static Dot inspectedDot = null;
 	public static MainScreen screen;
 	public static MainScreenCanvas msc;
+	public static InfoScreen infoScreen;
+	public static InfoScreenCanvas isc;
 	public volatile static ObjectManager obMan;
 	public static World map;
+	public static Mouse mouse;
 	public static ThreadManager threadOverseer;
 	public static GameUpdater updater;
 	public static ArrayList<Dot> teams;
@@ -30,16 +37,18 @@ public class Main {
 		// THESE NEED TO BE INITIALIZED FIRST;
 		obMan = new ObjectManager();
 		msc = new MainScreenCanvas();
+		isc = new InfoScreenCanvas();
 		updater = new GameUpdater();
 		map = new World();// World should always be the first Drawable
 							// initialized . TODO: Priority rendering.
 		// This would be used to have certain objects always render above
 		// others. And wouldn't be dependent on initialization order.
 		// The order for these <i>shouldn't</i> matter.
-
+		mouse = new Mouse();
 		threadOverseer = new ThreadManager();
 
 		screen = new MainScreen(Settings.name, Settings.width, Settings.height);
+		infoScreen = new InfoScreen("Dots: Stronghold -> Inspector", 200, 200);
 
 		teams = new ArrayList<Dot>();
 		for (int i = 0; i < 2000; i++) {
@@ -53,6 +62,7 @@ public class Main {
 
 	private static void wakeUp() {
 		screen.wakeUp();
+		infoScreen.wakeUp();
 		threadOverseer.wakeUp();
 
 	}

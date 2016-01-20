@@ -7,7 +7,7 @@ import game.Settings;
 
 public abstract class Entity extends Drawable {
 
-	String uniqueID = UUID.randomUUID().toString();
+	public String uniqueID = UUID.randomUUID().toString();
 	public int[] pos = { 60, 40 };
 	public int[] size = { Settings.scaleFactor[0], Settings.scaleFactor[1] };
 
@@ -15,7 +15,7 @@ public abstract class Entity extends Drawable {
 		Main.obMan.loadIntoEntities(this);
 
 	}
-
+	
 	public abstract void tick();
 	protected abstract void takeDamage(double d);
 

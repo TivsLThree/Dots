@@ -3,11 +3,11 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import game.Main;
+
 import game.Settings;
 import world.World;
 
-import static game.Settings.*;
+
 
 public class Dot extends Entity {
 	private Team team;
@@ -19,6 +19,7 @@ public class Dot extends Entity {
 	 * Basically attack points, deals this much attack percent to opponent's
 	 * damagedPercent.
 	 */
+	@SuppressWarnings("unused")
 	private double attackPercentStrength = .25d;
 
 	public Dot(Team t) {
@@ -96,6 +97,8 @@ public class Dot extends Entity {
 			return World.worldMap[pos[0] + 1][pos[1]] != 1;
 		case UP:
 			return World.worldMap[pos[0]][pos[1] - 1] != 1;
+		default:
+			break;
 		}
 		return false;
 	}
@@ -108,4 +111,5 @@ public class Dot extends Entity {
 	protected void takeDamage(double d) {
 		damagedPercent += d;
 	}
+
 }

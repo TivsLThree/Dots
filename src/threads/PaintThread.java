@@ -17,7 +17,7 @@ public class PaintThread implements Runnable {
 		while (shouldRun) {
 			try {
 				Main.msc.repaint();
-
+				Main.isc.repaint();
 				Thread.sleep(delay);
 			} catch (InterruptedException e) {
 				e.printStackTrace();

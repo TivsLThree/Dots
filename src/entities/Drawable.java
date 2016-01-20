@@ -10,6 +10,6 @@ public abstract class Drawable {
 	}
 
 	public abstract void draw(Graphics2D g);
-
+	
 	protected abstract void markForDeath();
 }

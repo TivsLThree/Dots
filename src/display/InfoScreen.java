@@ -5,10 +5,11 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 import game.Main;
+import game.Settings;
 
 
 @SuppressWarnings("serial")
-public class MainScreen extends JFrame {
+public class InfoScreen extends JFrame {
 	/**
 	 * 
 	 * @param title
@@ -16,18 +17,19 @@ public class MainScreen extends JFrame {
 	 * @param width
 	 * @param height
 	 */
-	public MainScreen(String title, int width, int height) {
+	public InfoScreen(String title, int width, int height) {
 		this.setTitle(title);
 		this.setSize(width, height);
 	}
 
 	public void wakeUp() {
+		this.setLocation(Settings.width,0);
+		
 		this.setBackground(Color.black);
 		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-		this.addMouseListener(Main.mouse);
-		this.addMouseMotionListener(Main.mouse);
-		this.add(Main.msc);
+
+		this.add(Main.isc);
 	}
 }

@@ -20,6 +20,7 @@ public class ThreadManager {
 
 	}
 
+	@SuppressWarnings("unused")
 	private void stop() {
 		paint.stop();
 		update.stop();
