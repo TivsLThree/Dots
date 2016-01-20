@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 
 
 import game.Settings;
+import world.Castle;
 import world.World;
 
 
@@ -22,8 +23,9 @@ public class Dot extends Entity {
 	@SuppressWarnings("unused")
 	private double attackPercentStrength = .25d;
 
-	public Dot(Team t) {
+	public Dot(Team t, int[] pos) {
 		team = t;
+		this.pos = pos;
 
 	}
 
@@ -107,7 +109,6 @@ public class Dot extends Entity {
 		return World.worldMap[pos[0]][pos[1]] == -1;
 	}
 
-	@Override
 	protected void takeDamage(double d) {
 		damagedPercent += d;
 	}

@@ -17,6 +17,6 @@ public abstract class Entity extends Drawable {
 	}
 	
 	public abstract void tick();
-	protected abstract void takeDamage(double d);
+	//protected abstract void takeDamage(double d);
 
 }

@@ -29,7 +29,7 @@ public class InfoScreen extends JFrame {
 		this.setVisible(true);
 		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
-
+		
 		this.add(Main.isc);
 	}
 }

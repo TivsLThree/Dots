@@ -18,11 +18,13 @@ public class InfoScreenCanvas extends JPanel {
 		g.setColor(getBackground());
 		g.fillRect(0, 0, Settings.width, Settings.height);
 
-		if (Main.inspectedDot != null) {
-			g.setColor(Main.inspectedDot.getTeam().getColor());
+		if (Main.selectedDot != null) {
+			g.setColor(Main.selectedDot.getTeam().getColor());
 			g.fillRect(0, 0, Settings.width, Settings.height);
-			g.setColor(new Color(200,200,200));
-			g.drawString(Main.inspectedDot.uniqueID, 10, 10);
+			g.setColor(new Color(200, 200, 200));
+			g.drawString(Main.selectedDot.uniqueID, 10, 10);
+		} else if(Main.selectedDot == null) {
+			Main.infoScreen.setVisible(false);
 		}
 		g.dispose();
 

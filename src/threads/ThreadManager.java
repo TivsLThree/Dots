@@ -1,8 +1,8 @@
 package threads;
 
 public class ThreadManager {
-	PaintThread paint = new PaintThread(60);
-	UpdateThread update = new UpdateThread(100);
+	PaintThread paint = new PaintThread(20);
+	UpdateThread update = new UpdateThread(60);
 
 	public ThreadManager() {
 

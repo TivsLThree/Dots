@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import display.InfoScreen;
 import display.InfoScreenCanvas;
@@ -12,10 +13,11 @@ import input.Mouse;
 import entities.Dot;
 import logic.GameUpdater;
 import threads.ThreadManager;
+import world.Castle;
 import world.World;
 
 public class Main {
-	public static Dot inspectedDot = null;
+	public static Dot selectedDot;
 	public static MainScreen screen;
 	public static MainScreenCanvas msc;
 	public static InfoScreen infoScreen;
@@ -26,6 +28,7 @@ public class Main {
 	public static ThreadManager threadOverseer;
 	public static GameUpdater updater;
 	public static ArrayList<Dot> teams;
+	public static ArrayList<Castle> castles;
 
 	public static void main(String[] args) {
 		initAll();
@@ -48,15 +51,9 @@ public class Main {
 		threadOverseer = new ThreadManager();
 
 		screen = new MainScreen(Settings.name, Settings.width, Settings.height);
-		infoScreen = new InfoScreen("Dots: Stronghold -> Inspector", 200, 200);
-
-		teams = new ArrayList<Dot>();
-		for (int i = 0; i < 2000; i++) {
-			for(Team t: Team.values()){
-				teams.add(new Dot((t)));
-			}
-			
-		}
+		infoScreen = new InfoScreen("Dots: Stronghold -> Inspector", 200, Settings.height);
+		genCastles();
+		genTeams();
 		//
 	}
 
@@ -67,4 +64,37 @@ public class Main {
 
 	}
 
+	public static void genTeams() {
+		teams = new ArrayList<Dot>();
+		teams.clear();
+
+		for (Team t : Team.values()) {
+			for (Castle c : castles) {
+				if (c.team == t) {
+					for (int i = 0; i < 20; i++) {
+						teams.add(new Dot(t, c.pos.clone()));
+					}
+				}
+			}
+		}
+
+		selectedDot = teams.get(0);
+	}
+
+	private static void genCastles() {
+		castles = new ArrayList<>();
+		for (Team t : Team.values()) {
+			castles.add(new Castle(t, randomPosition()));
+		}
+	}
+
+	private static int[] randomPosition() {
+
+		int[] pos = new int[] { (int) (Math.random() * World.worldMap.length),
+				(int) (Math.random() * World.worldMap[0].length) };
+		if(World.worldMap[pos[0]][pos[1]] != 0){
+			pos = randomPosition();
+		}
+		return pos;
+	}
 }

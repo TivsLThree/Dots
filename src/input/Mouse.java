@@ -25,7 +25,7 @@ public class Mouse extends MouseInputAdapter {
 		e = SwingUtilities.convertMouseEvent(Main.screen, e, Main.msc);
 		pos[0] = e.getX();
 		pos[1] = e.getY();
-		Main.inspectedDot = selectDot();
+		Main.selectedDot = selectDot();
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class Mouse extends MouseInputAdapter {
 					int[] ePos = e.pos;
 			
 					if (ePos[0] == pos[0] && ePos[1] == pos[1]) {
-						
+						Main.infoScreen.setVisible(true);
 						return e;
 					}
 				}
