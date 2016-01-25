@@ -28,7 +28,7 @@ public class MainScreenCanvas extends JPanel {
 				Main.obMan.drawables.remove(d);
 			}
 		}
-
+	
 		g.dispose();
 
 	}

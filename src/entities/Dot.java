@@ -3,15 +3,11 @@ package entities;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-
 import game.Settings;
-import world.Castle;
 import world.World;
 
-
-
 public class Dot extends Entity {
-	private Team team;
+
 	/**
 	 * Basically health, once damagedPercent reaches 1, the dot is terminated.
 	 */
@@ -24,13 +20,10 @@ public class Dot extends Entity {
 	private double attackPercentStrength = .25d;
 
 	public Dot(Team t, int[] pos) {
+		super("Dot");
 		team = t;
 		this.pos = pos;
 
-	}
-
-	public Team getTeam() {
-		return team;
 	}
 
 	private void move() {
@@ -66,7 +59,7 @@ public class Dot extends Entity {
 	 */
 	@Override
 	public void markForDeath() {
-		if (damagedPercent >= 1) {	
+		if (damagedPercent >= 1) {
 			markOfDeath = true;
 		}
 
@@ -75,9 +68,10 @@ public class Dot extends Entity {
 	@Override
 	public void tick() {
 		move();
-		if(isInLava(pos))
+		if (isInLava(pos))
 			takeDamage(1);
 		markForDeath();
+		updateStatForNerds();
 	}
 
 	@Override
@@ -111,6 +105,13 @@ public class Dot extends Entity {
 
 	protected void takeDamage(double d) {
 		damagedPercent += d;
+	}
+
+	@Override
+	public void updateStatForNerds() {
+		statsForNerds.put("Damaged Percent:", damagedPercent);
+		statsForNerds.put("UUID:", uniqueID);
+
 	}
 
 }

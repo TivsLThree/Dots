@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JFrame;
 
 import game.Main;
+import game.Settings;
 
 
 @SuppressWarnings("serial")
@@ -29,5 +30,6 @@ public class MainScreen extends JFrame {
 		this.addMouseListener(Main.mouse);
 		this.addMouseMotionListener(Main.mouse);
 		this.add(Main.msc);
+		setSize(this.getWidth()+ 5, this.getHeight()+ 29);
 	}
 }

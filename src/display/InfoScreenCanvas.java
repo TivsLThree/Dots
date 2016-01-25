@@ -3,6 +3,8 @@ package display;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
@@ -18,12 +20,16 @@ public class InfoScreenCanvas extends JPanel {
 		g.setColor(getBackground());
 		g.fillRect(0, 0, Settings.width, Settings.height);
 
-		if (Main.selectedDot != null) {
-			g.setColor(Main.selectedDot.getTeam().getColor());
+		if (Main.selectedEntity != null) {
+			g.setColor(Main.selectedEntity.team.getColor());
 			g.fillRect(0, 0, Settings.width, Settings.height);
 			g.setColor(new Color(200, 200, 200));
-			g.drawString(Main.selectedDot.uniqueID, 10, 10);
-		} else if(Main.selectedDot == null) {
+			int i = 1;
+			for (Map.Entry<String, Object> e : Main.selectedEntity.statsForNerds.entrySet()) {
+				g.drawString(e.getKey() + e.getValue(), 0, i * 10);
+				i++;
+			}
+		} else if (Main.selectedEntity == null) {
 			Main.infoScreen.setVisible(false);
 		}
 		g.dispose();

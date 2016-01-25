@@ -6,6 +6,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.MouseInputAdapter;
 
 import entities.Dot;
+import entities.Entity;
 import game.Main;
 import game.Settings;
 import world.World;
@@ -25,7 +26,7 @@ public class Mouse extends MouseInputAdapter {
 		e = SwingUtilities.convertMouseEvent(Main.screen, e, Main.msc);
 		pos[0] = e.getX();
 		pos[1] = e.getY();
-		Main.selectedDot = selectDot();
+		Main.selectedEntity = selectDot();
 	}
 
 	@Override
@@ -34,7 +35,7 @@ public class Mouse extends MouseInputAdapter {
 
 	}
 
-	private Dot selectDot() {
+	private Entity selectDot() {
 		int[] pos = Main.mouse.pos;
 
 		if (!isOutOfThisWorld(pos)) {
@@ -43,11 +44,13 @@ public class Mouse extends MouseInputAdapter {
 
 				pos = convertToMapSize(pos);
 
-				for (Dot e : Main.teams) {
+				for (Entity e : Main.obMan.entities) {
 					int[] ePos = e.pos;
-			
+					if(e.TYPE.equals("Castle")){
+					}
 					if (ePos[0] == pos[0] && ePos[1] == pos[1]) {
 						Main.infoScreen.setVisible(true);
+
 						return e;
 					}
 				}

@@ -1,5 +1,6 @@
 package game;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -10,14 +11,16 @@ import display.MainScreenCanvas;
 import entities.ObjectManager;
 import entities.Team;
 import input.Mouse;
+import entities.Castle;
 import entities.Dot;
+import entities.Entity;
 import logic.GameUpdater;
 import threads.ThreadManager;
-import world.Castle;
+import world.FileReader;
 import world.World;
 
 public class Main {
-	public static Dot selectedDot;
+	public static Entity selectedEntity;
 	public static MainScreen screen;
 	public static MainScreenCanvas msc;
 	public static InfoScreen infoScreen;
@@ -29,6 +32,7 @@ public class Main {
 	public static GameUpdater updater;
 	public static ArrayList<Dot> teams;
 	public static ArrayList<Castle> castles;
+	public static FileReader fileReader = new FileReader();
 
 	public static void main(String[] args) {
 		initAll();
@@ -38,15 +42,28 @@ public class Main {
 
 	private static void initAll() {
 		// THESE NEED TO BE INITIALIZED FIRST;
+
 		obMan = new ObjectManager();
 		msc = new MainScreenCanvas();
 		isc = new InfoScreenCanvas();
 		updater = new GameUpdater();
-		map = new World();// World should always be the first Drawable
-							// initialized . TODO: Priority rendering.
+		// World should always be the first Drawable
+		// initialized . TODO: Priority rendering.
 		// This would be used to have certain objects always render above
 		// others. And wouldn't be dependent on initialization order.
 		// The order for these <i>shouldn't</i> matter.
+		map = new World();
+		try {
+			int[][] newMap = fileReader.loadWorld();
+			if (newMap != null) {
+				World.worldMap = newMap;
+			} else {
+				map.genWorld();
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		mouse = new Mouse();
 		threadOverseer = new ThreadManager();
 
@@ -71,14 +88,14 @@ public class Main {
 		for (Team t : Team.values()) {
 			for (Castle c : castles) {
 				if (c.team == t) {
-					for (int i = 0; i < 20; i++) {
+					for (int i = 0; i < 1; i++) {
 						teams.add(new Dot(t, c.pos.clone()));
 					}
 				}
 			}
 		}
 
-		selectedDot = teams.get(0);
+		selectedEntity = teams.get(0);
 	}
 
 	private static void genCastles() {
@@ -92,7 +109,7 @@ public class Main {
 
 		int[] pos = new int[] { (int) (Math.random() * World.worldMap.length),
 				(int) (Math.random() * World.worldMap[0].length) };
-		if(World.worldMap[pos[0]][pos[1]] != 0){
+		if (World.worldMap[pos[0]][pos[1]] != 0) {
 			pos = randomPosition();
 		}
 		return pos;
